@@ -77,6 +77,29 @@ revoke all on function public.handle_new_user() from public,anon,authenticated;
 create trigger on_auth_user_created_codesprint after insert on auth.users
 for each row execute function public.handle_new_user();
 
+-- Keep the student-facing profile email aligned with Supabase Auth after a
+-- confirmed email change. This keeps admin lookup and account records in sync.
+create or replace function public.sync_profile_email_from_auth()
+returns trigger
+language plpgsql
+security definer
+set search_path=''
+as $
+begin
+  update public.profiles
+  set email=lower(trim(new.email))
+  where id=new.id;
+  return new;
+end;
+$;
+revoke all on function public.sync_profile_email_from_auth() from public,anon,authenticated;
+drop trigger if exists on_auth_user_email_updated_codesprint on auth.users;
+create trigger on_auth_user_email_updated_codesprint
+after update of email on auth.users
+for each row
+when (old.email is distinct from new.email)
+execute function public.sync_profile_email_from_auth();
+
 alter table public.profiles enable row level security;
 alter table public.leaderboard_entries enable row level security;
 alter table public.assignments enable row level security;

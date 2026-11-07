@@ -7,6 +7,12 @@ In Supabase Dashboard → Authentication → URL Configuration, set Site URL to:
 `https://codesprint-1-0.vercel.app/`
 Add `https://codesprint-1-0.vercel.app/**` to the Redirect URLs allow-list. The Google OAuth provider's redirect URI in Google Cloud must be the Supabase callback URL shown in the Google provider settings (not the Vercel URL).
 
+### Email confirmation and delivery
+Email confirmation remains enabled. The Supabase built-in sender is for testing and only delivers to email addresses belonging to the Supabase organisation; it cannot deliver confirmation messages to all students. It also has a project-wide hourly send limit. The portal now shows a retry countdown only after a genuine email rate-limit response. The countdown is an estimate based on the hourly limit; it does not bypass the provider limit.
+
+To deliver confirmation and password-recovery emails to ordinary student addresses, configure custom SMTP in Supabase Authentication → SMTP Settings. The SMTP provider must authorize a sender address/domain you control. A Vercel `vercel.app` subdomain is not a sender domain you control. Keep email confirmation enabled when configuring production email delivery.
+
+
 ## First administrator
 1. Register your own account in the portal.
 2. Confirm the email if email confirmation is enabled.
