@@ -36,8 +36,8 @@ window.openLesson=index=>{
   const m=window.CURRICULUM[index];if(!m)return;
   selectedLessonDay=m.day;$('lessonCatalog').classList.add('hidden');$('lessonDetail').classList.remove('hidden');
   $('lessonDetail').innerHTML='<div class="lesson-detail"><div class="lesson-actions"><button class="btn secondary" onclick="renderCurriculum()">← All modules</button><span class="module-meta">WEEK '+m.week+' · DAY '+m.day+' · '+esc(m.duration)+'</span></div><h2>'+esc(m.title)+'</h2><p class="muted">'+esc(m.summary)+'</p><div class="outcome-list">'+m.outcomes.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+m.sections.map(s=>'<article class="lesson-section"><h3>'+esc(s.heading)+'</h3><p>'+esc(s.body)+'</p><pre class="lesson-code"><code>'+esc(s.code)+'</code></pre><div class="lesson-note">'+esc(s.note)+'</div></article>').join('')+'<div class="lesson-practice"><div class="module-meta">PRACTICE CHALLENGE</div><h3>Try it yourself</h3><p>'+esc(m.practice)+'</p><div class="lesson-note"><b>Important:</b> Submit your own original attempt. Do not copy the instructor solution or another student\'s work. Explain your approach and make sure you understand every line you submit.</div><h3>Submit your challenge</h3><div class="challenge-submit"><label for="challengeResponse">Your code and explanation</label><textarea id="challengeResponse" placeholder="# Write your own Python solution here..."></textarea><button class="btn full" onclick="submitLessonChallenge('+index+')">Submit your challenge</button><div id="challengeHistory" class="challenge-history muted">Your previous submissions will appear here.</div></div><h3>Understanding checkpoint</h3><ol>'+m.checkpoint.map(q=>'<li>'+esc(q)+'</li>').join('')+'</ol></div></div>';
-  loadLessonChallenge(${index});
-  if(profile?.role==='admin') loadInstructorSolution(${index});
+  loadLessonChallenge(index);
+  if(profile?.role==='admin') loadInstructorSolution(index);
   window.scrollTo({top:0,behavior:'smooth'});
 };
 
