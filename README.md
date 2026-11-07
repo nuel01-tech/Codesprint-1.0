@@ -5,7 +5,7 @@ A responsive student portal for the two-week Python and automation class.
 ## Features
 - Open student registration; new accounts are always students
 - Email/password authentication with Supabase
-- Student learning hub and class schedule\n- 20 structured Python and automation modules across six live class days
+- Student learning hub and class schedule\n- 21 structured Python and automation modules across six live class days
 - Assignment publishing and private student file submissions
 - Multiple-choice quizzes graded server-side
 - Leaderboard with administrator-awarded points
