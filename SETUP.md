@@ -4,8 +4,8 @@
 This portal uses the dedicated project `hupqkpwrhnoypskathyg` at https://hupqkpwrhnoypskathyg.supabase.co. The schema, RLS policies, private assignment bucket and server-side quiz grading function have already been applied to that project.
 
 In Supabase Dashboard → Authentication → URL Configuration, set Site URL to:
-`https://nuel01-tech.github.io/Codesprint-1.0/`
-Add the same URL to the Redirect URLs allow-list.
+`https://codesprint-1-0.vercel.app/`
+Add `https://codesprint-1-0.vercel.app/**` to the Redirect URLs allow-list. The Google OAuth provider's redirect URI in Google Cloud must be the Supabase callback URL shown in the Google provider settings (not the Vercel URL).
 
 ## First administrator
 1. Register your own account in the portal.
@@ -13,11 +13,8 @@ Add the same URL to the Redirect URLs allow-list.
 3. Open Supabase SQL Editor and run the SQL in `supabase/admin-setup.sql`, replacing `YOUR_ADMIN_EMAIL` with your confirmed email.
 4. Repeat that statement for each additional administrator. Never let public signup select the admin role.
 
-## GitHub Pages
-1. Open repository Settings → Pages.
-2. Set Build and deployment source to **GitHub Actions**.
-3. The workflow in `.github/workflows/pages.yml` deploys the root site on pushes to `main`.
-4. Site address: https://nuel01-tech.github.io/Codesprint-1.0/
+## Production deployment
+The production portal is hosted at `https://codesprint-1-0.vercel.app/`. Vercel is connected to this GitHub repository and automatically deploys pushes to `main`. Use the Vercel production URL for student access and Supabase Auth redirects. The GitHub Pages workflow is a legacy deployment path and should not be used as the primary OAuth redirect.
 
 ## Test before inviting students
 - Register a student and confirm profile creation.
